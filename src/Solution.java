@@ -1,0 +1,33 @@
+public class Solution {
+    public int pivotIndex(int[] nums) {
+        int lhs = 0;
+        int rhs = 0;
+        int result = -1;
+
+        for (int i = 1; i < nums.length; i++) {
+            rhs += nums[i];
+        }
+
+        for(int i = 1; i <= nums.length; i++) {
+            if (lhs == rhs) {
+                // the edge case where the pivot index is the first element
+                if (i == 1) { result = 0; break; }
+
+                result = i - 1;
+                break;
+            }
+
+            if (i != nums.length) {
+                // the edge case where the pivot index is the last element
+                lhs += nums[i - 1];
+                rhs -= nums[i];
+            } else {
+                lhs += nums[i - 1];
+                rhs -= nums[i - 1];
+            }
+
+        }
+
+        return result;
+    }
+}
