@@ -34,23 +34,31 @@ public class Solution {
     public static int pivotIndex(int[] nums) {
         int lhs = 0;
         int rhs = 0;
-        int result = -1;
 
         for (int num : nums) { rhs += num; }
         rhs -= nums[0];
 
-        for(int i = 1; i < nums.length; i++){
-            if (lhs == rhs) { result = i - 1; }
+        for(int i = 1; i <= nums.length; i++){
+            if (lhs == rhs) {
+                return i - 1;
+            }
 
-            lhs += nums[i - 1];
-            rhs -= nums[i];
+            if (i == nums.length) {
+                // edge case when pivot index is last element
+                lhs += nums[i - 1];
+                rhs -= nums[i - 1];
+            } else {
+                // when pivot index is not last element
+                lhs += nums[i - 1];
+                rhs -= nums[i];
+            }
+
         }
-
-        return result;
+        return -1;
     }
 
     public static void main(String[] args) {
-        int[] arr = {1,2,3};
+        int[] arr = {-1,-1,0,0,-1,-1};
         System.out.println(pivotIndex(arr));
     }
 }
