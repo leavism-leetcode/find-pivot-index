@@ -1,5 +1,5 @@
 public class Solution {
-    public int pivotIndex(int[] nums) {
+    public static int originalPivotIndex(int[] nums) {
         int lhs = 0;
         int rhs = 0;
         int result = -1;
@@ -29,5 +29,28 @@ public class Solution {
         }
 
         return result;
+    }
+
+    public static int pivotIndex(int[] nums) {
+        int lhs = 0;
+        int rhs = 0;
+        int result = -1;
+
+        for (int num : nums) { rhs += num; }
+        rhs -= nums[0];
+
+        for(int i = 1; i < nums.length; i++){
+            if (lhs == rhs) { result = i - 1; }
+
+            lhs += nums[i - 1];
+            rhs -= nums[i];
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1,2,3};
+        System.out.println(pivotIndex(arr));
     }
 }
